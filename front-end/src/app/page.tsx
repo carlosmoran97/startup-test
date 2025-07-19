@@ -1,11 +1,18 @@
+"use client";
+
 import Header from "@/components/header";
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
+  const router = useRouter();
   return (
     <div>
       <div className="bg-card-background">
         <Header>
-          <button className="bg-primary text-on-primary rounded-[5px] font-amiko w-[325px] h-[50px] shadow-xl cursor-pointer">
+          <button
+            className="bg-primary text-on-primary rounded-[5px] font-amiko w-[325px] h-[50px] shadow-xl cursor-pointer"
+            onClick={() => router.push("/destino/nuevo")}
+          >
             Agregar destino
           </button>
         </Header>

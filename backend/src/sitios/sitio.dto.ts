@@ -1,6 +1,6 @@
-import { IsString, IsUrl } from "class-validator";
+import { IsOptional, IsString, IsUrl } from "class-validator";
 
-export class CrearSitioDTO {
+export class CreateSitioDTO {
   @IsString()
   nombre: string;
 
@@ -12,4 +12,22 @@ export class CrearSitioDTO {
 
   @IsUrl()
   url: string;
+}
+
+export class UpdateSitioDTO {
+  @IsOptional()
+  @IsString()
+  nombre?: string;
+
+  @IsOptional()
+  @IsString()
+  descripcion?: string;
+
+  @IsOptional()
+  @IsString()
+  direccion?: string;
+
+  @IsOptional()
+  @IsString()
+  url?: string;
 }

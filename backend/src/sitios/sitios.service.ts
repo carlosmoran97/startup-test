@@ -22,4 +22,8 @@ export class SitiosService {
       throw new InternalServerErrorException("Could't save site to the database");
     }
   }
+
+  async delete(id: number) {
+    return await this.sitioRepository.delete(id);
+  }
 }

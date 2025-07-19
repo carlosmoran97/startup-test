@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
 import { SitiosService } from './sitios.service';
 import { CrearSitioDTO } from './sitio.dto';
 
@@ -29,7 +29,7 @@ export class SitiosController {
   }
 
   @Delete(":id")
-  deleteSitio(@Param() params: any) {
-    return `Eliminar el sitio con ID: ${params.id}`;
+  deleteSitio(@Param('id', ParseIntPipe) id: number) {
+    return this.sitiosService.delete(id);
   }
 }

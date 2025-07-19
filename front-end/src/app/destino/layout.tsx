@@ -13,7 +13,7 @@ export default function DestinationLayout({
   const router = useRouter();
 
   return (
-    <div className="bg-page-background">
+    <div className="bg-page-background max-w-full">
       <Header>
         <button
           className="bg-primary text-on-primary rounded-[5px] font-amiko w-[325px] h-[50px] shadow-xl cursor-pointer"
@@ -23,6 +23,12 @@ export default function DestinationLayout({
         </button>
       </Header>
       <section>{children}</section>
+      <footer>
+        <div
+          className="h-[77px] w-full bg-cover bg-center"
+          style={{ backgroundImage: "url('/images/banner.png')" }}
+        />
+      </footer>
     </div>
   );
 }

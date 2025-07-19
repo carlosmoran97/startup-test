@@ -10,12 +10,12 @@ export class SitiosController {
 
   @Get()
   getSitios() {
-    return "Sitios";
+    return this.sitiosService.retrieve();
   }
 
   @Post()
-  createSitio(@Body() createSitioDTO: CrearSitioDTO) {
-    return this.sitiosService.crearSitio(createSitioDTO);
+  create(@Body() createSitioDTO: CrearSitioDTO) {
+    return this.sitiosService.create(createSitioDTO);
   }
 
   @Post(":id")

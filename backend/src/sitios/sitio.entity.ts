@@ -16,4 +16,7 @@ export class SitioEntity {
 
   @Column()
   url: string;
+
+  @Column({ nullable: true })
+  likes: number;
 }

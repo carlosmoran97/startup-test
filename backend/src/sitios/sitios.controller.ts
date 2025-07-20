@@ -1,6 +1,7 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
 import { SitiosService } from './sitios.service';
 import { UpdateSitioDTO, CreateSitioDTO } from './sitio.dto';
+import { PaginationQueryDTO } from 'src/dtos/pagination-query.dto';
 
 @Controller('sitios')
 export class SitiosController {
@@ -9,8 +10,8 @@ export class SitiosController {
   }
 
   @Get()
-  getSitios() {
-    return this.sitiosService.find();
+  getSitios(@Query() paginationQuery: PaginationQueryDTO) {
+    return this.sitiosService.find(paginationQuery);
   }
 
   @Get(":id")

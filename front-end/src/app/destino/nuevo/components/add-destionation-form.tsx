@@ -36,7 +36,7 @@ export default function AddDestinationForm() {
 
   return (
     <div className="bg-card-background rounded-[10px] pt-20 pb-44 mb-40 px-4 flex flex-col items-center">
-      <h1 className="font-amiko text-3xl md:text-5xl mb-24">Agregar destino turistico</h1>
+      <h1 className="font-amiko text-3xl md:text-5xl mb-4 lg:mb-24">Agregar destino turistico</h1>
       <div className="max-w-[735px] w-full flex flex-col items-center">
         <div className={styles.labelContainer}>
           <label htmlFor="nombre" className={styles.label}>Nombre</label>
@@ -86,7 +86,7 @@ export default function AddDestinationForm() {
         {errors.url && <span className={styles.error}>{errors.url.message}</span>}
 
         <button
-          className="font-abeezee bg-primary text-on-primary rounded-[5px] w-full max-w-[598px] h-[50px] shadow-xl cursor-pointer mt-24"
+          className="font-abeezee bg-primary text-on-primary rounded-[5px] w-full max-w-[598px] h-[50px] shadow-xl cursor-pointer mt-8 lg:mt-24"
           onClick={handleSubmit(onSubmit)}
         >
           {mutation.isPending ? "Guardando..." : "Agregar destino"}

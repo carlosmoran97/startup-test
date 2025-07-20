@@ -2,7 +2,7 @@ import AddDestinationForm from "./components/add-destionation-form";
 
 export default function NewDestinationPage() {
   return (
-    <div className="px-12">
+    <div className="px-8 lg:px-12">
       <AddDestinationForm />
     </div>
   );

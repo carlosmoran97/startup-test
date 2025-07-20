@@ -3,6 +3,7 @@ import { UpdateSitioDTO, CreateSitioDTO } from './sitio.dto';
 import { SitioEntity } from './sitio.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { PaginationQueryDTO } from 'src/dtos/pagination-query.dto';
 
 @Injectable()
 export class SitiosService {
@@ -11,8 +12,19 @@ export class SitiosService {
     private sitioRepository: Repository<SitioEntity>,
   ) { }
 
-  async find() {
-    return await this.sitioRepository.find();
+  async find(paginationQuery: PaginationQueryDTO) {
+    const { limit = 10, offset = 0 } = paginationQuery;
+    const [items, total] = await this.sitioRepository.findAndCount({
+      skip: Number(offset),
+      take: Number(limit),
+      order: { id: 'DESC' },
+    });
+    return {
+      data: items,
+      total,
+      limit: Number(limit),
+      offset: Number(offset),
+    };
   }
 
   async findOne(id: number) {

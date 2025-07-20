@@ -28,7 +28,7 @@ export class SitiosService {
   }
 
   async findOne(id: number) {
-    const sitio = this.sitioRepository.findOneBy({ id });
+    const sitio = await this.sitioRepository.findOneBy({ id });
     if (!sitio) {
       throw new NotFoundException(`Site with ID ${id} not found.`);
     }

@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
 import { SitiosService } from './sitios.service';
 import { UpdateSitioDTO, CreateSitioDTO } from './sitio.dto';
-import { PaginationQueryDTO } from 'src/dtos/pagination-query.dto';
+import { PaginationQueryDTO } from '../../src/dtos/pagination-query.dto';
 
 @Controller('sitios')
 export class SitiosController {

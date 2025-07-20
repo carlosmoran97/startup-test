@@ -22,6 +22,7 @@ backend/.env
     DB_DATABASE=startup
 
 En el front-end crear un archivo **.env.local** con los siguientes valores
+
 front-end/.env.local
 
     NEXT_PUBLIC_API_URL=http://localhost:3000

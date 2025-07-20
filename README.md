@@ -55,5 +55,14 @@ Para iniciar el servidor ejecutar
 
 El servicio debería de estar disponible en http://localhost:4000
 
+## Test unitarios (backend)
+
+Para ejecutar los tests unitarios ubicarse en la carpeta backend y ejecutar el comando
+
+    npm run test
+
+<img width="565" height="305" alt="image" src="https://github.com/user-attachments/assets/2ac0f321-69bc-4993-957e-f2e3bcc4eef7" />
+
+
 ## Demo
 https://www.youtube.com/watch?v=7sdBMUafY8E

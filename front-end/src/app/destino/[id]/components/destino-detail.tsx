@@ -6,12 +6,11 @@ import { eliminarDestino } from "@/api/eliminar-destino";
 import Image from "next/image";
 import { likearDestino } from "@/api/likear-destino";
 
-interface IDestinoCardProps {
+interface IDestinoDetailProps {
   destinoData: IDestino;
 }
 
-const DestinoCard = ({ destinoData }: IDestinoCardProps) => {
-  const router = useRouter();
+const DestinoDetail = ({ destinoData }: IDestinoDetailProps) => {
   const [destino, setDestino] = useState<IDestino>(destinoData);
   const queryClient = useQueryClient();
 
@@ -27,6 +26,9 @@ const DestinoCard = ({ destinoData }: IDestinoCardProps) => {
 
   const likeMutation = useMutation({
     mutationFn: likearDestino,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['destinos', destino.id] });
+    },
     onError: (error: any) => {
       alert(error?.response?.data?.message || "Ocurrió un error al likear el sitio");
     },
@@ -47,47 +49,35 @@ const DestinoCard = ({ destinoData }: IDestinoCardProps) => {
   };
 
   return (
-    <div className="rounded-[10px] shadow-xl bg-card-background w-full max-w-[494px] pb-16">
-      <div
-        className="h-[219px] w-full bg-cover bg-center rounded-t-[10px]"
-        style={{ backgroundImage: `url('${destino.url}')` }}
-      />
-      <div className="px-12 relative">
-        <button
-          className="absolute top-0 right-7 font-amiko cursor-pointer"
-          onClick={onLikeDestination}
-        >
-          <div className="flex">
-            <span className="mr-1">{destino.likes ?? 0}</span>
-            <Image src="/images/like.png" width={24} height={24} alt="Like" />
-          </div>
-        </button>
-        <div className="w-full flex justify-center mt-7">
-          <h3 className="max-w-[330px] font-amiko text-[45px] font-bold">{destino.nombre}</h3>
+    <div className="rounded-[10px] shadow-xl bg-card-background w-full pb-16">
+      <div className="px-4 lg:px-32 pt-4 lg:pt-20">
+        <div
+          className="h-[545px] w-full bg-cover bg-center rounded-t-[10px]"
+          style={{ backgroundImage: `url('${destino.url}')` }}
+        />
+        <div className="w-full flex justify-end p-4 lgp-6">
+          <button
+            className="font-amiko cursor-pointer"
+            onClick={onLikeDestination}
+          >
+            <div className="flex">
+              <span className="mr-1">{destino.likes ?? 0}</span>
+              <Image src="/images/like.png" width={24} height={24} alt="Like" />
+            </div>
+          </button>
         </div>
-        <p className="w-full max-w-[400px] text-2xl mt-7">
+        <div className="w-full flex justify-center mt-4">
+          <h3 className="font-amiko text-[60px] font-bold">{destino.nombre}</h3>
+        </div>
+        <p className="w-full max-w-[1505px] text-2xl mt-7">
           {destino.descripcion}
         </p>
-        <p className="w-full max-w-[400px] text-xl mt-7">
+        <p className="w-full max-w-[660px] text-xl mt-7">
           {destino.direccion}
         </p>
-        <div className="flex flex-col items-center justify-center max-w-[400px] w-full">
-          <button
-            className="font-abeezee text-md mb-3 h-[50px] w-full cursor-pointer"
-            onClick={() => router.push(`/destino/${destino.id}`)}
-          >
-            Ver más
-          </button>
-          <button
-            className="font-abeezee text-md h-[37px] bg-accent shadow-xl w-full text-on-primary rounded-[5px] cursor-pointer"
-            onClick={onDelete}
-          >
-            Eliminar
-          </button>
-        </div>
       </div>
     </div>
   );
 };
 
-export default DestinoCard;
+export default DestinoDetail;

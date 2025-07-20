@@ -1,10 +1,18 @@
 "use client";
 
+import { obtenerDestinos } from "@/api/obtener-destinos";
 import Header from "@/components/header";
+import Loader from "@/components/loader";
+import { useQuery } from "@tanstack/react-query";
 import { useRouter } from 'next/navigation';
 
 export default function Home() {
   const router = useRouter();
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["destinos"],
+    queryFn: obtenerDestinos,
+  });
+  console.log(data);
   return (
     <div>
       <div className="bg-card-background">
@@ -26,7 +34,10 @@ export default function Home() {
           className="h-[77px] w-full bg-cover bg-center"
           style={{ backgroundImage: "url('/images/banner.png')" }}
         />
-        <div>Lista de destinos</div>
+        {isLoading && <Loader />}
+        {error && (
+          <span className="text-red-500 text-sm p-4">{error.message}</span>
+        )}
       </main>
     </div>
   );

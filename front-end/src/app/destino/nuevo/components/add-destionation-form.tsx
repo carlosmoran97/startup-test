@@ -1,7 +1,11 @@
 "use client";
 
+import { crearDestino } from "@/api/crear-destino";
 import { apiUrl } from "@/contants/environment";
+import { IDestino } from "@/types/destino";
+import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 const styles = {
   label: "w-full text-left font-amiko text-xl leading-[35px]",
@@ -10,18 +14,24 @@ const styles = {
   error: "text-red-500 text-sm mt-2"
 };
 
-interface DestinationForm {
-  nombre: string;
-  direccion: string;
-  descripcion: string;
-  url: string;
-}
 
 export default function AddDestinationForm() {
-  const { register, handleSubmit, formState: { errors } } = useForm<DestinationForm>();
+  const router = useRouter();
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<IDestino>();
 
-  const onSubmit = (data: DestinationForm) => {
-    console.log(JSON.stringify(data, null, 2), apiUrl);
+  const mutation = useMutation({
+    mutationFn: crearDestino,
+    onSuccess: () => {
+      reset();
+      router.push("/");
+    },
+    onError: (error: any) => {
+      alert(error?.response?.data?.message || "Ocurrió un error al crear el sitio");
+    },
+  });
+
+  const onSubmit = (data: IDestino) => {
+    mutation.mutate(data);
   };
 
   return (
@@ -79,7 +89,7 @@ export default function AddDestinationForm() {
           className="font-abeezee bg-primary text-on-primary rounded-[5px] w-full max-w-[598px] h-[50px] shadow-xl cursor-pointer mt-24"
           onClick={handleSubmit(onSubmit)}
         >
-          Agregar destino
+          {mutation.isPending ? "Guardando..." : "Agregar destino"}
         </button>
       </div>
     </div>

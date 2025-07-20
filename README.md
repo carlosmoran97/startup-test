@@ -63,6 +63,12 @@ Para ejecutar los tests unitarios ubicarse en la carpeta backend y ejecutar el c
 
 <img width="565" height="305" alt="image" src="https://github.com/user-attachments/assets/2ac0f321-69bc-4993-957e-f2e3bcc4eef7" />
 
+## Documentación de Swagger
+
+Entrar a http://localhost:3000/api
+
+<img width="1728" height="962" alt="image" src="https://github.com/user-attachments/assets/2496c349-b1c7-4a10-8720-b950810c7494" />
+
 
 ## Demo
 https://www.youtube.com/watch?v=7sdBMUafY8E
